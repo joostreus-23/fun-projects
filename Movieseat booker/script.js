@@ -1,6 +1,8 @@
 const filmOpties = document.getElementById("films");
 const stoelenLijst = document.getElementById("stoelenlijst");
 
+let aantalStoelen = 50;
+let geselecteerdeStoelen = 0;
 let films = [
   { titel: "The Outpost", prijs: 10, vanaf: 16, gerne: "oorlog" },
   {
@@ -18,9 +20,6 @@ let films = [
   },
 ];
 
-let aantalStoelen = 50;
-let geselecteerdeStoelen = 0;
-
 const filmsToList = () => {
   films.forEach((film) => {
     (newOption = document.createElement("option")),
@@ -29,8 +28,6 @@ const filmsToList = () => {
     filmOpties.appendChild(newOption);
   });
 };
-
-filmsToList();
 
 const maakStoelen = (aantal) => {
   for (let i = 0; i < aantal; i++) {
@@ -49,17 +46,12 @@ const maakStoelen = (aantal) => {
   }
 };
 
-const stoelSelecteren = (event) => {
-  if (event.target.className == "selecteerd") {
-    geselecteerdeStoelen++;
-  }
-};
-
-maakStoelen(aantalStoelen);
-
 const onderTitel = (aantal) => {
   const zin = document.getElementById("eindzin");
   const filmprijs = document.getElementById("films").value;
   const totaal = aantal * filmprijs;
   zin.innerHTML = `Je hebt ${aantal} stoel(en) geselecteerd, per stuk kost €${filmprijs}. Dat is totaal €${totaal}`;
 };
+
+filmsToList();
+maakStoelen(aantalStoelen);
