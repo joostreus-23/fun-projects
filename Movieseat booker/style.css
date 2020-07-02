@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+/* De kleuren van de formulier */
+:root {
+  --goed-color: darkgreen;
+  --fout-color: darkred;
+  --basis-color: ghostwhite;
+  --achtergrond-color: rgb(20, 20, 20);
+}
+
+/* Hiermee word de kleur van auto email de zelfde kleur en achtergrond   */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 70px var(--achtergrond-color) inset !important;
+}
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--basis-color) !important;
+}
+
+/* standaard instellingen */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--achtergrond-color);
+  font-family: "Open Sans", sans-serif;
+  color: var(--basis-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Het formulier zelf */
+.form {
+  border: 2px solid var(--basis-color);
+  padding: 30px;
+  width: 50%;
+  border-radius: 5px;
+  max-width: 600px;
+}
+
+h3 {
+  text-align: center;
+}
+
+/* Elke register item zit in een form-element */
+.form-element {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  margin-bottom: 30px;
+  /* border: 1px solid white; */
+}
+
+/* Van elk item zit de input, label en span vande label in een form-controle */
+.form-controle {
+  width: 100%;
+  position: relative;
+  height: 90px;
+  overflow: hidden;
+  /* border: 1px solid white; */
+}
+
+/* De default setting van de label, die valt totaal over de input heen */
+.label-naam {
+  color: var(--basis-color);
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid var(--basis-color);
+}
+
+/* Default settings van de span in de label */
+.content-naam {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Default settings van de input die pas tevoorschijn komt als de input ge-focused wordt */
+.form-controle input {
+  border: none;
+  outline: none;
+  color: var(--basis-color);
+  width: 100%;
+  height: 100%;
+  padding-top: 45px;
+  font-size: 20px;
+  background-color: var(--achtergrond-color);
+}
+
+/* settings van de register knop */
+#registerbutton {
+  cursor: pointer;
+  background-color: var(--achtergrond-color);
+  border: 1px solid var(--basis-color);
+  color: var(--basis-color);
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+/* De default setting van de foutmelding */
+.form-element small {
+  color: var(--fout-color);
+  position: absolute;
+  top: 90px;
+  left: 0;
+  visibility: hidden;
+}
+
+/* De default setting van de inkomende border-bottom bij input focus */
+.label-naam::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  bottom: -1px;
+  transform: translateX(-100%);
+  color: var(--basis-color);
+}
+
+/* De verandering van de .content-naam bij focus en als er value in zit, dit is de rede dat er een span in de label zit omdat die bewerkt kan worden*/
+.form-controle input:focus + .label-naam .content-naam,
+.form-controle input:valid + .label-naam .content-naam {
+  transform: translateY(-200%);
+  font-size: 14px;
+  color: var(--basis-color);
+}
+
+/* De verandering van de .label-naam bij focus en als er value in zit, de inkomende border bottom lijn*/
+.form-controle input:focus + .label-naam::after,
+.form-controle input:valid + .label-naam::after {
+  border-bottom: 4px solid var(--basis-color);
+  transform: translateX(0%);
+  transition: transform 0.5s ease;
+}
+
+/* Foutmelding settings */
+
+/* hiermeer wordt de foutmelding zichtbaar */
+.form-element.fout small {
+  visibility: visible;
+}
+
+/* De verandering van de .content-naam bij focus en als er value in zit, dit is de rede dat er een span in de label zit omdat die bewerkt kan worden*/
+.form-element.fout .form-controle input:focus + .label-naam .content-naam,
+.form-element.fout .form-controle input:valid + .label-naam .content-naam {
+  transform: translateY(-200%);
+  font-size: 14px;
+  color: var(--fout-color);
+}
+
+/* De verandering van de .content-naam bij focus en als er value in zit, dit is de rede dat er een span in de label zit omdat die bewerkt kan worden*/
+
+/* De verandering van de .label-naam bij focus en als er value in zit, de inkomende border bottom lijn*/
+.form-element.fout .form-controle input:focus + .label-naam::after,
+.form-element.fout .form-controle input:valid + .label-naam::after {
+  border-bottom: 4px solid var(--fout-color);
+  transform: translateX(0%);
+  transition: transform 0.5s ease;
+}
+
+/* goed settings */
+
+/* De verandering van de .content-naam bij focus en als er value in zit, dit is de rede dat er een span in de label zit omdat die bewerkt kan worden*/
+.form-element.goed .form-controle input:focus + .label-naam .content-naam,
+.form-element.goed .form-controle input:valid + .label-naam .content-naam {
+  transform: translateY(-200%);
+  font-size: 14px;
+  color: var(--goed-color);
+}
+
+.form-element.goed .form-controle input {
+  color: var(--goed-color);
+}
+
+/* De verandering van de .label-naam bij focus en als er value in zit, de inkomende border bottom lijn*/
+.form-element.goed .form-controle input:focus + .label-naam::after,
+.form-element.goed .form-controle input:valid + .label-naam::after {
+  border-bottom: 4px solid var(--goed-color);
+  transform: translateX(0%);
+  transition: transform 0.5s ease;
+}
